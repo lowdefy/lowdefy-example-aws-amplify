@@ -5,11 +5,12 @@ frontend:
       commands:
         - corepack enable
         - pnpm i
+        - pnpm build:lowdefy
     build:
       commands:
         - pnpm build
   artifacts:
-    baseDirectory: .lowdefy/server/.next
+    baseDirectory: .next
     files:
       - '**/*'
   cache:

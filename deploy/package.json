@@ -6,7 +6,8 @@
   "type": "module",
   "packageManager": "pnpm@7.14.2",
   "scripts": {
-    "build": "lowdefy build --log-level=debug",
+    "build:lowdefy": "lowdefy build --config-directory ../  --server-directory . --no-next-build --log-level=debug",
+    "build": "next build",
     "dev": "lowdefy dev --no-open",
     "lowdefy": "lowdefy"
   },
