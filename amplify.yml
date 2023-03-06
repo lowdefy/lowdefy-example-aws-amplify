@@ -1,0 +1,16 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - pnpm i
+    build:
+      commands:
+        - pnpm build
+  artifacts:
+    baseDirectory: .lowdefy/server/.next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
