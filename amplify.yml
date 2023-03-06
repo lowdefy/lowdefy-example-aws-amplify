@@ -9,6 +9,7 @@ applications:
             - pnpm i
             - pnpm build:lowdefy
             - cp ../setBuildCommand.mjs .
+            - cp ../next.config.js .
             - node setBuildCommand.mjs
         build:
           commands:
