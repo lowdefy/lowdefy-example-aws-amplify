@@ -1,3 +1,6 @@
 .lowdefy/**
 .env
-node_modules
+/deploy/**
+
+# Trick in order to allow the cloning of the repository in AWS Amplify. This file is removed as one of the first operations in amplify.yml
+!/deploy/package.json

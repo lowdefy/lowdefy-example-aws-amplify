@@ -1,25 +1,40 @@
 version: 1
 applications:
   - appRoot: deploy
+    env:
+      variables:
+        LOWDEFY_BUILD_OUTPUT_STANDALONE: 1
+        NEXT_TELEMETRY_DISABLED: 1
+    backend:
+      phases:
+        build:
+          commands:
+            - amplifyPush --simple
     frontend:
       phases:
         preBuild:
           commands:
             - corepack enable
-            - pnpm i
-            - pnpm build:lowdefy
-            - cp ../setBuildCommand.mjs .
-            - cp ../next.config.js .
-            - node setBuildCommand.mjs
-            - rm -rf node_modules
-            - npm install
+              # Trick so that the installation works well, while having initially a package.json file when the repository is cloned, to avoid the error CustomerError: Cannot read 'next' version in package.json
+            - rm package.json
+              # Read Lowdefy version from lowdefy.yaml using sed
+            - LOWDEFY_VERSION=$(sed -nE "s/lowdefy:(.*)/\1/p" ../lowdefy.yaml)
+              # Substitution params are to trim whitespace from the LOWDEFY_VERSION var
+            - pnpx lowdefy@${LOWDEFY_VERSION//[[:space:]]/} build --config-directory ../  --server-directory . --no-next-build --log-level=debug 
         build:
           commands:
-            - npm run build
+            - env | grep -e NEXTAUTH_ >> .env
+            - env | grep -e LOWDEFY_SECRET_ >> .env
+            # The commands below extract in the required format KEY=VALUE the secret environment variables defined in AWS System Manager Parameter Store in the format '/amplify/{your_app_id}/{your_backend_environment_name}/{your_parameter_name}' as explained here: https://docs.aws.amazon.com/amplify/latest/userguide/environment-variables.html#environment-secrets
+            - echo LOWDEFY_SECRET_AUTH0_CLIENT_ID=$(echo $(env | grep -e secrets | sed 's/secrets=//') | npx jqn .LOWDEFY_SECRET_AUTH0_CLIENT_ID) >> .env
+            - echo LOWDEFY_SECRET_AUTH0_CLIENT_SECRET=$(echo $(env | grep -e secrets | sed 's/secrets=//') | npx jqn .LOWDEFY_SECRET_AUTH0_CLIENT_SECRET) >> .env
+            - echo NEXTAUTH_SECRET=$(echo $(env | grep -e secrets | sed 's/secrets=//') | npx jqn .NEXTAUTH_SECRET) >> .env
+            - pnpm next build
       artifacts:
         baseDirectory: .next
         files:
           - '**/*'
       cache:
         paths:
-          - node_modules/**/*
+          # - deploy/node_modules/**/*  #Commented out in order to avoid issues with caching node_modules whenever there is a new push into the branch in AWS Amplify
+          - deploy/.next/cache/**/*
