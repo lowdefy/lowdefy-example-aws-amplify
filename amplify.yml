@@ -11,6 +11,8 @@ applications:
             - cp ../setBuildCommand.mjs .
             - cp ../next.config.js .
             - node setBuildCommand.mjs
+            - rm -rf node_modules
+            - npm ci
         build:
           commands:
             - npm run build
