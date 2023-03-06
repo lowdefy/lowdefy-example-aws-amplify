@@ -12,7 +12,7 @@ applications:
             - node setBuildCommand.mjs
         build:
           commands:
-            - pnpm run build
+            - npm run build
       artifacts:
         baseDirectory: .next
         files:
