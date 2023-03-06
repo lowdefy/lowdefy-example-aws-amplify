@@ -8,8 +8,8 @@ applications:
             - corepack enable
             - pnpm i
             - pnpm build:lowdefy
-            - ls -a
-            - node setBuildCommand.cjs
+            - cp ../setBuildCommand.mjs .
+            - node setBuildCommand.mjs
         build:
           commands:
             - pnpm run build

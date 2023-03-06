@@ -1,14 +1,14 @@
-const fs = require("fs");
+import { readFileSync, writeFileSync } from "node:fs";
 
 const packageJson = JSON.parse(
-  fs.readFileSync("./package.json", {
+  readFileSync("./package.json", {
     encoding: "utf8",
   })
 );
 
 packageJson.scripts.build = "next build";
 
-fs.writeFileSync(
+writeFileSync(
   "./package.json",
   JSON.stringify(packageJson, null, 2).concat("\n")
 );
