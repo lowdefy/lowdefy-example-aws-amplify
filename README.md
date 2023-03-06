@@ -15,14 +15,14 @@ cd deploy
 amplify init
 ```
 
-3.1 Enter the name of the project: (e.g. "lowdefyamplify")
-3.2 Choose the default editor: (e.g. "Visual Studio Code")
-3.3 Choose the type of app you are building: javascript
-3.4 Choose the javascript framework you are using: react
-3.5 Source Directory Path: .
-3.6 Distribution Directory Path: .next
-3.7 Build Command: pnpm next build
-3.8 Start Command: pnpm start
+- 3.1 Enter the name of the project: (e.g. "lowdefyamplify")
+- 3.2 Choose the default editor: (e.g. "Visual Studio Code")
+- 3.3 Choose the type of app you are building: javascript
+- 3.4 Choose the javascript framework you are using: react
+- 3.5 Source Directory Path: .
+- 3.6 Distribution Directory Path: .next
+- 3.7 Build Command: pnpm next build
+- 3.8 Start Command: pnpm start
 
 Then choose as provider: awscloudformation
 
@@ -31,8 +31,8 @@ Then choose as provider: awscloudformation
 ```
 amplify add hosting
 ```
-4.1 Enter the name of the environment: (e.g. "test")
-4.2 Choose CI/CD
+- 4.1 Enter the name of the environment: (e.g. "test")
+- 4.2 Choose CI/CD
 
 Then, once configured the backend you will be taken to the AWS Amplify Console, when you need to choose the repository for the frontend.
 Choose for example GitHub, then the repostitory and then the branch.
