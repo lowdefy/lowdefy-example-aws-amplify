@@ -10,7 +10,7 @@ applications:
             - pnpm build:lowdefy
         build:
           commands:
-            - pnpm build
+            - next build
       artifacts:
         baseDirectory: .next
         files:
