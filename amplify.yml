@@ -8,9 +8,10 @@ applications:
             - corepack enable
             - pnpm i
             - pnpm build:lowdefy
+            - node setBuildCommand.mjs
         build:
           commands:
-            - pnpm next build
+            - pnpm run build
       artifacts:
         baseDirectory: .next
         files:
