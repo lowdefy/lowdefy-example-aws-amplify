@@ -10,6 +10,8 @@ packageJson.scripts.build = "next build";
 packageJson.scripts.dev = "next dev";
 packageJson.scripts.start = "next start";
 
+delete packageJson.packageManager;
+
 writeFileSync(
   "./package.json",
   JSON.stringify(packageJson, null, 2).concat("\n")
