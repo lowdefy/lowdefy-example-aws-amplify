@@ -8,7 +8,8 @@
   "scripts": {
     "build:lowdefy": "lowdefy build --config-directory ../  --server-directory . --no-next-build --log-level=debug",
     "build": "next build",
-    "dev": "lowdefy dev --no-open",
+    "dev": "next build",
+    "start": "next start",
     "lowdefy": "lowdefy"
   },
   "dependencies": {
