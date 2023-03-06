@@ -7,6 +7,8 @@ const packageJson = JSON.parse(
 );
 
 packageJson.scripts.build = "next build";
+packageJson.scripts.dev = "next dev";
+packageJson.scripts.start = "next start";
 
 writeFileSync(
   "./package.json",
