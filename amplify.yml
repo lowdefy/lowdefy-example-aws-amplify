@@ -3,6 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
+        - corepack enable
         - pnpm i
     build:
       commands:
